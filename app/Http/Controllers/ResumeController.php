@@ -34,6 +34,16 @@ class ResumeController extends Controller
             ]);
         }
 
+        // $profile = Profile::find(1);
+        // Add Education
+        foreach($request->educations as $education) {
+            $profile->educations()->create([
+                'title' => $education['title'],
+                'school' => $education['school'],
+                'start_date' => \Carbon\Carbon::parse($education['start_date'])->format('Y-m-d'), 
+            ]);
+        }
+
         return to_route('resume');
     }
 }
