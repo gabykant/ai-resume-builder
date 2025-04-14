@@ -5,11 +5,12 @@ import TextInput from "@/Components/Form/TextInput";
 import TextArea from "@/components/Form/TextArea";
 import Dropdown from "@/Components/Form/Dropdown";
 import ExperienceSection from "@/components/ExperienceSection";
-import Education from "../components/Education/Form";
+import Education from "../components/Education/Section";
 import Skill from "@/components/Skill/Form";
 
 export default function Resume() {
     const [experiences, setExperiences] = useState([]);
+    const [educations, setEducations] = useState([]);
     const { data, setData, post, processing, errors } = useForm({
         fullname: "",
         email: "",
@@ -19,6 +20,7 @@ export default function Resume() {
         country: "",
         professionnal_objective: "",
         experiences: [],
+        educations: [],
     });
 
     // Let format the date and be sure to send the Y-m-d to the backEnd
@@ -28,7 +30,8 @@ export default function Resume() {
 
     useEffect(() => {
         setData("experiences", experiences);
-    }, [experiences]);
+        setData("educations", educations);
+    }, [experiences, educations]);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -40,6 +43,10 @@ export default function Resume() {
                 ...exp,
                 start_date: formatDate(exp.start_date),
                 end_date: formatDate(exp.end_date),
+            })),
+            educations: educations.map((edu) => ({
+                ...edu,
+                start_date: formatDate(edu.start_date),
             })),
         };
 

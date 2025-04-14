@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
+    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,5 +25,10 @@ class Profile extends Model
     public function experiences()
     {
         return $this->hasMany(Experience::class);
+    }
+
+    public function educations()
+    {
+        return $this->hasMany(Education::class);
     }
 }
