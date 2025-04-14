@@ -33,14 +33,22 @@ class ResumeController extends Controller
                 'end_date' => \Carbon\Carbon::parse($experience['end_date'])->format('Y-m-d'),
             ]);
         }
-
-        // $profile = Profile::find(1);
+        
         // Add Education
         foreach($request->educations as $education) {
             $profile->educations()->create([
                 'title' => $education['title'],
                 'school' => $education['school'],
                 'start_date' => \Carbon\Carbon::parse($education['start_date'])->format('Y-m-d'), 
+            ]);
+        }
+
+        // Add Certification
+        foreach($request->certifications as $certification) {
+            $profile->certifications()->create([
+                'title' => $certification['title'],
+                'delivered_by' => $certification['delivered_by'],
+                'exam_year' => \Carbon\Carbon::parse($certification['exam_year'])->format('Y-m-d'), 
             ]);
         }
 
