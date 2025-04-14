@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('certifications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('profile')->constrained();
+            $table->foreignId('profile_id')->constrained();
             $table->string('title'); 
             $table->date('exam_year');
             $table->string('delivered_by');

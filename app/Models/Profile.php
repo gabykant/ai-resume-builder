@@ -31,4 +31,9 @@ class Profile extends Model
     {
         return $this->hasMany(Education::class);
     }
+
+    public function certifications()
+    {
+        return $this->hasMany(Certification::class);
+    }
 }

@@ -7,10 +7,12 @@ import Dropdown from "@/Components/Form/Dropdown";
 import ExperienceSection from "@/components/ExperienceSection";
 import Education from "../components/Education/Section";
 import Skill from "@/components/Skill/Form";
+import Certification from "@/components/Certification/Section";
 
 export default function Resume() {
     const [experiences, setExperiences] = useState([]);
     const [educations, setEducations] = useState([]);
+    const [certifications, setCertifications] = useState([]);
     const { data, setData, post, processing, errors } = useForm({
         fullname: "",
         email: "",
@@ -21,6 +23,7 @@ export default function Resume() {
         professionnal_objective: "",
         experiences: [],
         educations: [],
+        certifications: [],
     });
 
     // Let format the date and be sure to send the Y-m-d to the backEnd
@@ -31,7 +34,8 @@ export default function Resume() {
     useEffect(() => {
         setData("experiences", experiences);
         setData("educations", educations);
-    }, [experiences, educations]);
+        setData("certifications", certifications);
+    }, [experiences, educations, certifications]);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -47,6 +51,10 @@ export default function Resume() {
             educations: educations.map((edu) => ({
                 ...edu,
                 start_date: formatDate(edu.start_date),
+            })),
+            certifications: certifications.map((certif) => ({
+                ...certif,
+                exam_year: formatDate(certif.exam_year),
             })),
         };
 
@@ -128,6 +136,10 @@ export default function Resume() {
 
                 <div className="p-6">
                     <Education errors={errors} />
+                </div>
+
+                <div className="p-6">
+                    <Certification errors={errors} />
                 </div>
 
                 <div className="p-6">

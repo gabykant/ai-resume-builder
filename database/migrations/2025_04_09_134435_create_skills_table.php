@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('profile_id')->constrained();
             $table->longText('title')->nullable();
             $table->timestamps();
         });
